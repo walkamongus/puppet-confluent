@@ -44,6 +44,7 @@ Puppet::Type.type(:kafka_connector_config).provide(:api) do
     request = Net::HTTP::Get.new('/connectors')
     Puppet.debug("Retrieving connectors with GET request to #{conn.address}:#{conn.port}#{request.path}")
     response = conn.request(request)
+    return [] if response.code.to_i < 400
     connectors = JSON.parse(response.body)
     connectors.collect do |connector|
       c = {}
