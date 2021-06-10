@@ -33,7 +33,7 @@ Puppet::Type.type(:kafka_topic).provide(:cli) do
       end
     end
 
-    topics_regex = /^Topic:\s+([0-9a-zA-Z_.-]+)\s+PartitionCount:\s+([0-9]+)\s+ReplicationFactor:\s+([0-9]+)\s+Configs:\s+(.*)$/i
+    topics_regex = /^Topic:\s+([0-9a-zA-Z_.-]+)\s+.*PartitionCount:\s+([0-9]+)\s+ReplicationFactor:\s+([0-9]+)\s+Configs:\s+(.*)$/i
     topics_output = kafka_topics(args).split("\n")
     topics = topics_output.select do |line|
       line.match?(topics_regex)
